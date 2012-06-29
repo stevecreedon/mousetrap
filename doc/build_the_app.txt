@@ -1,0 +1,114 @@
+1. Create the application
+
+	rails new mousetrap
+	
+1.1 Take a look at what its created.
+
+
+
+2. Add the Rspec gem
+
+2.1 Take a look at Rspec-rails on github and read the docs.
+
+2.2 Add the rspec-rails gem to bundler's Gemfile in the test and development groups only so that it's not needed on production
+
+	group :test, :development do
+		gem 'rspec-rails', "~> 2.0"
+	end
+	
+2.3 Install the gem
+
+	bundle install
+
+2.4 Add rspec-rails generators
+
+	bundle exec rails generate rspec:install
+	
+2.5 Take a look at the files it's created
+
+	
+	
+3. Add the Devise gem
+
+3.1 add the devise gem to bundlers Gemfile
+
+	gem 'devise'
+	
+3.2 install devise
+
+    rails generate devise:install
+
+3.3 look at the files devise has created and read the notes:
+
+      create  config/initializers/devise.rb
+      create  config/locales/devise.en.yml
+===============================================================================
+
+Some setup you must do manually if you haven't yet:
+
+  1. Ensure you have defined default url options in your environments files. Here 
+     is an example of default_url_options appropriate for a development environment 
+     in config/environments/development.rb:
+
+       config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+     In production, :host should be set to the actual host of your application.
+
+  2. Ensure you have defined root_url to *something* in your config/routes.rb.
+     For example:
+
+       root :to => "home#index"
+
+  3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+     For example:
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+  4. If you are deploying Rails 3.1 on Heroku, you may want to set:
+
+       config.assets.initialize_on_precompile = false
+
+     On config/application.rb forcing your application to not access the DB
+     or load models when precompiling your assets.
+
+===============================================================================
+
+
+
+4 Create a User model with devise
+
+	rails generate devise user
+	
+4.1 Take a look at what it's created:
+
+     invoke  active_record
+	 create    db/migrate/20120629090415_devise_create_users.rb
+	 create    app/models/user.rb
+	 invoke    rspec
+	 create      spec/models/user_spec.rb
+	 insert    app/models/user.rb
+	 route  devise_for :users
+
+4.2 Run the migration
+
+     bundle exec rake db:migrate
+
+
+
+5 Add Factory Girl
+
+Halfway between fixtures & mocks
+
+5.1 Add the factory girl gem to the Gemfile in the test & development group
+
+    group :test, :development do
+        gem 'factory_girl_rails'
+	    gem 'rspec-rails', "~> 2.0"
+    end
+
+5.2 Install the gem
+
+    bundle install
+
+    
