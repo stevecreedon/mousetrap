@@ -17,13 +17,11 @@
 
 
 
-
-
-
-4. Start the app
+3. Start the app
 
     rails s
 
-5.1 Delete the public.html
 
-5.2 Add the index view to layouts/home -> welcome to mousetrap    
+4.1 Delete the public.html
+
+4.2 Add the index view to views/home -> welcome to mousetrap    

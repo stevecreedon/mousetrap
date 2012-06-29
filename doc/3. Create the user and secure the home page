@@ -20,3 +20,12 @@
 2. Now let's secure the home page with Devise:
 
 	before_filter :authenticate_user!
+	
+3. Sign up
+
+4. Create the logout link in application.html.erb
+
+<% if user_signed_in? %>
+   <div><%= link_to "sign-out", destroy_user_session_path, :method => :delete  %></div>
+<% end %>
+
