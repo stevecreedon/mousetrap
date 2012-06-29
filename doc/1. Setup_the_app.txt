@@ -74,37 +74,37 @@ Some setup you must do manually if you haven't yet:
 
 ===============================================================================
 
-3.4 Add the flash notices as above
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+3.4 Generate the Rails views
 
-3.5 create the default root path in config/routes.rb - WE WILL CALL IT login#index
+rails generate devise:views
 
-root :to => "login#index"
+3.5 take a look at what they've created
+
+invoke  Devise::Generators::SharedViewsGenerator
+create    app/views/devise/shared
+create    app/views/devise/shared/_links.erb
+invoke  form_for
+create    app/views/devise/confirmations
+create    app/views/devise/confirmations/new.html.erb
+create    app/views/devise/passwords
+create    app/views/devise/passwords/edit.html.erb
+create    app/views/devise/passwords/new.html.erb
+create    app/views/devise/registrations
+create    app/views/devise/registrations/edit.html.erb
+create    app/views/devise/registrations/new.html.erb
+create    app/views/devise/sessions
+create    app/views/devise/sessions/new.html.erb
+create    app/views/devise/unlocks
+create    app/views/devise/unlocks/new.html.erb
+invoke  erb
+create    app/views/devise/mailer
+create    app/views/devise/mailer/confirmation_instructions.html.erb
+create    app/views/devise/mailer/reset_password_instructions.html.erb
+create    app/views/devise/mailer/unlock_instructions.html.erb
 
 
-4 Create a User model with devise
-
-	rails generate devise user
-	
-4.1 Take a look at what it's created:
-
-     invoke  active_record
-	 create    db/migrate/20120629090415_devise_create_users.rb
-	 create    app/models/user.rb
-	 invoke    rspec
-	 create      spec/models/user_spec.rb
-	 insert    app/models/user.rb
-	 route  devise_for :users
-
-4.2 Run the migration
-
-     bundle exec rake db:migrate
-
-
-
-5 Add Factory Girl
+4. Add Factory Girl
 
 Halfway between fixtures & mocks
 
@@ -118,5 +118,7 @@ Halfway between fixtures & mocks
 5.2 Install the gem
 
     bundle install
+
+
 
     

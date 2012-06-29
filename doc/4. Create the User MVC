@@ -1,0 +1,28 @@
+1. Create a user controller with rspec.
+
+    bundle exec rails g controller user
+
+
+2. make the user a resource in config/routes.rb
+   
+   resources :users
+
+
+3. View this in rake routes
+
+   bundle exec rake routes
+
+
+4. Write some tests 
+
+4.1 for the user model
+
+4.2 for the user controller
+
+
+5. Create the index action and view.
+
+
+6. Secure the user with Devise
+
+   

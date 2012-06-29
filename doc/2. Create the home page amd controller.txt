@@ -1,0 +1,31 @@
+1. Let's include the recommendations from the Devise notice:
+
+1.1 Add the flash notices as above
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+1.2 create the default root path in config/routes.rb
+
+    root :to => "home#index"
+
+
+
+2. Create the home controller
+
+    bundle exec rails g controller home
+
+
+
+
+
+
+4. Start the app
+
+    rails s
+
+5.1 Delete the public.html
+
+5.2 Add the index action to the home controller
+
+5.3 Add the index view to layouts/home -> welcome to mousetrap    

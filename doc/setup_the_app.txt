@@ -74,37 +74,9 @@ Some setup you must do manually if you haven't yet:
 
 ===============================================================================
 
-3.4 Add the flash notices as above
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-3.5 create the default root path in config/routes.rb - WE WILL CALL IT login#index
-
-root :to => "login#index"
 
 
-4 Create a User model with devise
-
-	rails generate devise user
-	
-4.1 Take a look at what it's created:
-
-     invoke  active_record
-	 create    db/migrate/20120629090415_devise_create_users.rb
-	 create    app/models/user.rb
-	 invoke    rspec
-	 create      spec/models/user_spec.rb
-	 insert    app/models/user.rb
-	 route  devise_for :users
-
-4.2 Run the migration
-
-     bundle exec rake db:migrate
-
-
-
-5 Add Factory Girl
+4. Add Factory Girl
 
 Halfway between fixtures & mocks
 
@@ -118,5 +90,7 @@ Halfway between fixtures & mocks
 5.2 Install the gem
 
     bundle install
+
+
 
     
