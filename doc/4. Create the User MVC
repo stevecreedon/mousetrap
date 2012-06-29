@@ -1,11 +1,11 @@
 1. Create a user controller with rspec.
 
-    bundle exec rails g controller user
+    bundle exec rails g controller users
 
 
 2. make the user a resource in config/routes.rb
    
-   resources :users
+   resources :users, :only => [:index]
 
 
 3. View this in rake routes
@@ -13,16 +13,25 @@
    bundle exec rake routes
 
 
-4. Write some tests 
-
-4.1 for the user model
-
-4.2 for the user controller
+4. Create the index action and view.
 
 
-5. Create the index action and view.
+5. Write some tests for the user controller
 
 
 6. Secure the user with Devise
 
-   
+
+7. Fix the breaking tests
+
+7.1 add the devise test helpers to the spec_helper configuration
+
+	config.include Devise::TestHelpers, :type => :controller
+	
+7.2
+
+   	before(:each) do
+   		sign_in Factory.create(:user)
+ 	end
+
+       

@@ -26,6 +26,4 @@
 
 5.1 Delete the public.html
 
-5.2 Add the index action to the home controller
-
-5.3 Add the index view to layouts/home -> welcome to mousetrap    
+5.2 Add the index view to layouts/home -> welcome to mousetrap    
