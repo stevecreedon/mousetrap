@@ -4,6 +4,8 @@ FactoryGirl.define do
   factory :profile do
     name 'steve test creedon'
     description 'this is a test description'
-    photo fixture_file_upload(Rails.root.join('spec','photos','photo.jpg'))
+    photo {
+      fixture_file_upload(Rails.root.join('spec','fixtures','photos','photo.jpg'),'image/jpeg')
+    }
   end
 end

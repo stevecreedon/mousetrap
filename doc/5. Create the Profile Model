@@ -44,7 +44,7 @@ Our profile model is going to have a name, a description and an attached photo. 
 		profile.valid?.should be_true
 	end
 
-3.2 add a photo to spec/photos/photo.jpg
+3.2 add a photo to spec/fixtures/photos/photo.jpg
 
 
 
@@ -78,9 +78,11 @@ end
 
     attr_accessible :name, :description, :photo
 
+
 9. Add the paperclip attribute
 
    has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
 
 10. Add the validations
     
@@ -90,4 +92,25 @@ end
   validates_attachment_content_type :photo, :content_type => [ 'image/jpeg']
   validates_attachment_size :photo, :less_than => 10.megabytes
 
-10. Run rake spec - it should all now pass
+
+11. Run rake spec - it should all now pass
+
+12. Connect the profile to a user
+
+12.1 Define the associations:
+
+ User:
+
+   has_one :profile
+ 
+ Profile:
+
+   belongs_to :user
+
+12.2 Create the migration
+
+  rails g migration add_user_id_to_profile
+
+  add_column :profiles, :user_id, :integer
+
+  bundle exec rake db:migrate

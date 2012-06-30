@@ -1,0 +1,9 @@
+<h1>Profile</h1>
+
+<%= link_to "back to users", users_path %>
+
+<div><%= @profile.name %></div>
+<div><%= @profile.description %></div>
+<div><%= image_tag @profile.photo.url(:medium) %></div>
+
+<div><%= link_to "edit profile", edit_user_profile_path(@profile.user) %></div>

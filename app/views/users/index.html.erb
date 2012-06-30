@@ -5,6 +5,17 @@
 <table>
 	<tr><th>Id.</th><th>Email</th><th>Encrypted Password</th>
 <% @users.each do |user| %>
-	<tr><td><%= user.id %></td><td><%= user.email %></td><td><%= user.encrypted_password %></td></tr>
+	<tr>
+		<td><%= user.id %></td>
+		<td><%= user.email %></td>
+		<td><%= user.encrypted_password %></td>
+		<td>
+		<% if user.profile %>
+			<%= link_to "edit profile", edit_user_profile_path(user) %>
+		<% else %>
+			<%= link_to "new profile", new_user_profile_path(user) %>
+		<% end %>
+		</td>
+	</tr>
 <% end %>
 </table>

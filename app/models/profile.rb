@@ -9,4 +9,5 @@ class Profile < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => [ 'image/jpeg']
   validates_attachment_size :photo, :less_than => 1.megabytes
   
+  belongs_to :user
 end

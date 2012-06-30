@@ -8,6 +8,8 @@ require 'rspec/autorun'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+include ActionDispatch::TestProcess
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -32,3 +34,4 @@ RSpec.configure do |config|
   
   config.include Devise::TestHelpers, :type => :controller
 end
+

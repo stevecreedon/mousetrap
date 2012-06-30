@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Profile do
   
   let :profile do
-    photo = File.new(File.join(Rails.root, 'spec', 'photos', 'photo.jpg'))
+    photo = File.new(File.join(Rails.root, 'spec','fixtures', 'photos', 'photo.jpg'))
     Profile.new(:name => 'steve', :description => 'this is a test description', :photo => photo)
   end
   
