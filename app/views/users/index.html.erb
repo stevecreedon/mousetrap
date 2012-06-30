@@ -1,1 +1,10 @@
 <h1>Users</h1>
+
+<%= link_to "dashboard", root_path %>    
+
+<table>
+	<tr><th>Id.</th><th>Email</th><th>Encrypted Password</th>
+<% @users.each do |user| %>
+	<tr><td><%= user.id %></td><td><%= user.email %></td><td><%= user.encrypted_password %></td></tr>
+<% end %>
+</table>

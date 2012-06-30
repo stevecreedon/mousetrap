@@ -1,0 +1,3 @@
+Install ImageMagick
+Install Rails
+Install Bundler

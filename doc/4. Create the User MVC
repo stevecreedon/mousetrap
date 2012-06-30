@@ -21,6 +21,7 @@
 
 6. Secure the user with Devise
 
+    before_filter :authenticate_user!
 
 7. Fix the breaking tests
 
@@ -34,4 +35,19 @@
    		sign_in Factory.create(:user)
  	end
 
-       
+8. List users in the users index view
+
+   <table>
+	<tr><th>Id.</th><th>Email</th><th>Encrypted Password</th>
+	<% @users.each do |user| %>
+		<tr><td><%= user.id %></td><td><%= user.email %></td><td><%= user.encrypted_password %></td></tr>
+	<% end %>
+   </table>
+
+9. Now lets add a link from the home page to the users page:
+
+<%= link_to "users", users_path %>
+
+10. Link back to dashboard:
+
+<%= link_to "dashboard", root_path %>       

@@ -1,0 +1,93 @@
+Our profile model is going to have a name, a description and an attached photo. For the photo we need the paperclip gem:
+
+1. install the paperclip gem (and ImageMagick)
+
+   gem 'paperclip'
+
+   bundle install
+
+2. Create the profile model:
+
+    bundle exec rails g model profile
+
+
+
+3. Write some tests:
+
+3.1 
+
+	let :profile do
+		photo = File.new(File.join(Rails.root, 'spec', 'photos', 'photo.jpg'))
+		Profile.new(:name => 'steve', :description => 'this is a test description', :photo => photo)
+	end
+
+	it 'should not be valid if the profile name is nil' do
+		profile.name = nil
+		profile.valid?.should be_false
+		profile.errors.full_messages.should == ["Name can't be blank"]
+	end
+
+	it 'should not be valid if the profile name is a blank string' do
+		profile.name = ''
+		profile.valid?.should be_false
+		profile.errors.full_messages.should == ["Name can't be blank"]
+	end
+
+	it 'should not be valid if the profile has no photo' do
+		profile.photo = nil
+		profile.valid?.should be_false
+		profile.errors.full_messages.should == ["Photo can't be blank"]
+	end
+
+	it 'should be valid if the profile has no description' do
+		profile.description = nil
+		profile.valid?.should be_true
+	end
+
+3.2 add a photo to spec/photos/photo.jpg
+
+
+
+4. Run rake spec - we should see migration pending
+
+
+
+5. Create the migration
+
+def change
+	create_table :profiles do |t|
+
+	  t.timestamps
+	  t.string :name
+	  t.string :description, :length => 255
+	  t.has_attached_file :photo
+	end
+end
+
+
+
+6. Run the migration
+
+
+
+7. Run rake spec again - we should see that our attributes are hidden.
+
+
+
+8. Make the attributes accessible
+
+    attr_accessible :name, :description, :photo
+
+9. Add the paperclip attribute
+
+   has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+10. Add the validations
+    
+  validates :name, :presence => true
+  
+  validates_attachment_presence :photo
+  validates_attachment_content_type :photo, :content_type => [ 'image/jpeg']
+  validates_attachment_size :photo, :less_than => 10.megabytes
+
+10. Run rake spec - it should all now pass
