@@ -47,3 +47,6 @@ gem 'paperclip', "~> 3.1.2"
 
 gem 'RedCloth', "~> 4.2.9"
 gem 'profanity_filter', "~> 0.1.1"
+
+gem "delayed_job", "~> 3.0.3"
+gem 'delayed_job_active_record'

@@ -33,7 +33,7 @@
 
     <%= raw RedCloth.new(ProfanityFilter::Base.clean(comment.text)).to_html %>
     
-    > (ignore this line)
+                                                                         > (ignore this line)
 
 # I'll leave you to test this how you will....
 
