@@ -48,14 +48,19 @@
     
     create an empty profiles/new.html.erb
 
-    it 'should assign an empty profile' do
+    it 'should assign a new profile with a user' do
   
-      get :new, :user_id => '1234'
+  	  user = FactoryGirl.create(:user)
+	  User.stub(:find).with('1234').and_return(user)
   
-      assigns(:profile).is_a?(Profile).should be_true
-      assigns(:profile).new_record?.should be_true 
-
-    end
+	  get :new, :user_id => '1234'
+  
+	  assigns(:profile).is_a?(Profile).should be_true
+	  assigns(:profile).new_record?.should be_true
+	  assigns(:profile).user.should == user 
+  
+	end
+	
 
 3.5 Test and build the create action
 
@@ -116,37 +121,36 @@
 3.7 Test and build the update action
 
   	it 'should update the specified users profile' do
-		user = FactoryGirl.create(:user)
-		user.profile = FactoryGirl.create(:profile)
-		Profile.any_instance.should_receive(:update_attributes).with("some attributes")
-
-		user.stub(:find).with(user.id.to_s).and_return(user)
-
-		put :update, :user_id => user.id, :profile => "some attributes"
+  	  profile = FactoryGirl.create(:profile, :user_id => 1234)
+	  profile.should_receive(:update_attributes).with("some attributes")
+  
+	  Profile.stub(:find_by_user_id).with("1234").and_return(profile)
+  
+	  put :update, :user_id => 1234, :profile => "some attributes"
 	end
 
 	it 'should redirect to the profile show action when the profile update is successful' do   
-		user = FactoryGirl.create(:user)
-		user.profile = FactoryGirl.create(:profile)
-		user.profile.stub(:update_attributes).with("some attributes").and_return(true)
-		User.stub(:find).with(user.id.to_s).and_return(user)
-
-		put :update, :user_id => user.id, :profile => "some attributes"
-
-		response.should redirect_to(user_profile_path(user.id))
+	  profile = FactoryGirl.create(:profile, :user_id => 1234)
+	  profile.should_receive(:update_attributes).with("some attributes").and_return(true)
+  
+	  Profile.stub(:find_by_user_id).with("1234").and_return(profile)
+  
+	  put :update, :user_id => 1234, :profile => "some attributes"
+  
+	  response.should redirect_to(user_profile_path('1234'))
 	end
 
 	it 'should render the new template when the profile update is not successful' do   
-		user = FactoryGirl.create(:user)
-		user.profile = FactoryGirl.create(:profile)
-		user.profile.stub(:update_attributes).with("some attributes").and_return(false)
-		User.stub(:find).with(user.id.to_s).and_return(user)
+	  profile = FactoryGirl.create(:profile, :user_id => 1234)
+	  profile.should_receive(:update_attributes).with("some attributes").and_return(false)
+  
+	  Profile.stub(:find_by_user_id).with("1234").and_return(profile)
+  
+	  put :update, :user_id => 1234, :profile => "some attributes"
 
-
-		put :update, :user_id => user.id, :profile => "some attributes"
-
-		response.should render_template("edit")
+	  response.should render_template("edit")
 	end
+
 
 4. Create the form partial and add it to new and edit 
 

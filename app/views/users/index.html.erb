@@ -3,15 +3,17 @@
 <%= link_to "dashboard", root_path %>    
 
 <table>
-	<tr><th>Id.</th><th>Email</th><th>Encrypted Password</th>
+	<tr><th>Id.</th><th>Email</th><th>signed in</th><th>ip</th>
 <% @users.each do |user| %>
 	<tr>
 		<td><%= user.id %></td>
 		<td><%= user.email %></td>
-		<td><%= user.encrypted_password %></td>
+		<td><%= user.current_sign_in_at %></td>
+		<td><%= user.current_sign_in_ip %></td>
 		<td>
 		<% if user.profile %>
-			<%= link_to "edit profile", edit_user_profile_path(user) %>
+			<%= link_to "edit profile", edit_user_profile_path(user) %>&nbsp;
+			<%= link_to "show profile", user_profile_path(user) %>
 		<% else %>
 			<%= link_to "new profile", new_user_profile_path(user) %>
 		<% end %>

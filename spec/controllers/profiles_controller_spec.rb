@@ -21,12 +21,16 @@ describe ProfilesController do
   
   describe "new" do
     
-    it 'should assign an empty profile' do
+    it 'should assign a new profile with a user' do
+      
+      user = FactoryGirl.create(:user)
+      User.stub(:find).with('1234').and_return(user)
       
       get :new, :user_id => '1234'
       
       assigns(:profile).is_a?(Profile).should be_true
-      assigns(:profile).new_record?.should be_true 
+      assigns(:profile).new_record?.should be_true
+      assigns(:profile).user.should == user 
       
     end
     
@@ -86,34 +90,32 @@ describe ProfilesController do
   describe "update" do
     
     it 'should update the specified users profile' do
-      user = FactoryGirl.create(:user)
-      user.profile = FactoryGirl.create(:profile)
-      Profile.any_instance.should_receive(:update_attributes).with("some attributes")
+      profile = FactoryGirl.create(:profile, :user_id => 1234)
+      profile.should_receive(:update_attributes).with("some attributes")
       
-      user.stub(:find).with(user.id.to_s).and_return(user)
+      Profile.stub(:find_by_user_id).with("1234").and_return(profile)
       
-      put :update, :user_id => user.id, :profile => "some attributes"
+      put :update, :user_id => 1234, :profile => "some attributes"
     end
     
     it 'should redirect to the profile show action when the profile update is successful' do   
-      user = FactoryGirl.create(:user)
-      user.profile = FactoryGirl.create(:profile)
-      user.profile.stub(:update_attributes).with("some attributes").and_return(true)
-      User.stub(:find).with(user.id.to_s).and_return(user)
+      profile = FactoryGirl.create(:profile, :user_id => 1234)
+      profile.should_receive(:update_attributes).with("some attributes").and_return(true)
       
-      put :update, :user_id => user.id, :profile => "some attributes"
+      Profile.stub(:find_by_user_id).with("1234").and_return(profile)
       
-      response.should redirect_to(user_profile_path(user.id))
+      put :update, :user_id => 1234, :profile => "some attributes"
+      
+      response.should redirect_to(user_profile_path('1234'))
     end
 
     it 'should render the new template when the profile update is not successful' do   
-      user = FactoryGirl.create(:user)
-      user.profile = FactoryGirl.create(:profile)
-      user.profile.stub(:update_attributes).with("some attributes").and_return(false)
-      User.stub(:find).with(user.id.to_s).and_return(user)
+      profile = FactoryGirl.create(:profile, :user_id => 1234)
+      profile.should_receive(:update_attributes).with("some attributes").and_return(false)
       
-
-      put :update, :user_id => user.id, :profile => "some attributes"
+      Profile.stub(:find_by_user_id).with("1234").and_return(profile)
+      
+      put :update, :user_id => 1234, :profile => "some attributes"
 
       response.should render_template("edit")
     end
