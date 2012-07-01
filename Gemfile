@@ -38,9 +38,12 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test, :development do
-    gem 'factory_girl_rails'
+    gem 'factory_girl_rails', "~> 3.5.0"
 	gem 'rspec-rails', "~> 2.0"
 end
 
-gem 'devise'
-gem 'paperclip'
+gem 'devise', "~> 2.1.2"
+gem 'paperclip', "~> 3.1.2"
+
+gem 'RedCloth', "~> 4.2.9"
+gem 'profanity_filter', "~> 0.1.1"

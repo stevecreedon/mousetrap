@@ -1,5 +1,5 @@
 <div>
 	<h3>comment:</h3>
-	<%= comment.text %>
+	<%= raw RedCloth.new(ProfanityFilter::Base.clean(comment.text)).to_html %>
 </div>	
 	

@@ -1,3 +1,9 @@
+1. Create the comments controller
+2. Create the RESTful comments routes
+3. Create the comments controller actions
+4. Create the comments controller views
+5. Add comments to our profile show view.
+
 
 # 1. Create the controller
 
@@ -23,7 +29,7 @@
 # Note that :show & :update only need a user_id and id (id being comment id).
 # No profile id is required because it's a has_one relationship between user and profile.
 
-# 2.4 Create the create action
+# 3. Add the create action to tyhe comments controller
 
 # in app/controllers/comments_controller.rb
 
@@ -33,7 +39,9 @@ def create
   redirect_to user_profile_path(user)
 end
 
-# 2.5 Create the new comment partial
+# 4. Create the comments views
+
+# 4.1 Create the new comment partial
 
 # create the file app/views/_new.html.erb (note the underscore) 
 
@@ -49,7 +57,7 @@ end
 </div>
 
 
-# 2.6 Create the show comment partial
+# 4.2 Create the show comment partial
 
 # create the file app/views/_show.html.erb (note the underscore) 
 
@@ -62,9 +70,9 @@ end
 
                                                                         >(ignore this line)
                                                                         
-# 3. Update our profiles show  view to display and add comments:
+# 5. Update our profiles show  view to display and add comments:
 
-# in app/views/profiles/show.html.erb
+# 5.1 in app/views/profiles/show.html.erb
 
 <h2>Comments</h2>
 
@@ -77,7 +85,7 @@ end
                                                                         >(ignore this line)
                                                                         
 
-# 4. Let's test the app
+# 5.2 Let's test the app
 
     rails s
                                                                         
