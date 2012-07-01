@@ -14,7 +14,7 @@
 #2.1 Nest our resources :profile to our existing users resource
 
     resources :users, :only => [:index] do
-    	resource :profile
+    	resource :profile, :except => [:destroy]
   	end
   	
 #2.2 Take a look at the routes:

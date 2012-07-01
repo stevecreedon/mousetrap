@@ -7,3 +7,11 @@
 <div><%= image_tag @profile.photo.url(:medium) %></div>
 
 <div><%= link_to "edit profile", edit_user_profile_path(@profile.user) %></div>
+
+<h2>Comments</h2>
+
+<% @profile.comments.each do |comment| %>
+	<%= render :partial => 'comments/show', :locals => {:comment => comment} %>
+<% end %>
+
+<%= render :partial => "comments/new", :locals => {:comment => Comment.new } %>

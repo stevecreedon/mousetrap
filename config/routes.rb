@@ -4,7 +4,7 @@ Mousetrap::Application.routes.draw do
   # 1. resources :users, :only => [:index]
   
   resources :users, :only => [:index] do
-    resource :profile do
+    resource :profile, :except => [:destroy] do
       resources :comments
     end
   end

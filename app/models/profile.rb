@@ -10,4 +10,5 @@ class Profile < ActiveRecord::Base
   validates_attachment_size :photo, :less_than => 1.megabytes
   
   belongs_to :user
+  has_many :comments
 end

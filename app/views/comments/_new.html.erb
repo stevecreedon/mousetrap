@@ -1,0 +1,8 @@
+<div>
+	<h3>Add a comment:</h3>
+	<%= form_for comment, :url => user_profile_comments_path(@profile.user.id) do |form| %>
+		<%= form.text_area :text %>
+		<br/>
+		<%= form.submit "add a comment" %>
+	<% end %>
+</div>
