@@ -18,6 +18,7 @@ class ProfilesController < ApplicationController
     if @profile.save
       redirect_to user_profile_path(params[:user_id])
     else
+      flash[:alert] = @profile.errors.full_messages.join(",")
       render :template => "profiles/new"
     end
     
@@ -30,10 +31,10 @@ class ProfilesController < ApplicationController
   
   def update
     @profile = Profile.find_by_user_id params[:user_id]
-        
     if @profile.update_attributes(params[:profile])
       redirect_to user_profile_path(params[:user_id])
     else
+      flash[:alert] = @profile.errors.full_messages.join(",")
       render :template => "profiles/edit"
     end
     

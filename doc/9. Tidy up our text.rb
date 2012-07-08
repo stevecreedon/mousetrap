@@ -17,8 +17,7 @@
 
     <%= raw RedCloth.new(comment.text).to_html %>
     
-                                                                        > (ignore this line)
-
+                                                                        
 # 2 lets stop all those angry web people out there...
 
     gem 'profanity_filter', "~> 0.1.1"
@@ -33,7 +32,7 @@
 
     <%= raw RedCloth.new(ProfanityFilter::Base.clean(comment.text)).to_html %>
     
-                                                                         > (ignore this line)
+                                                                         
 
 # I'll leave you to test this how you will....
 

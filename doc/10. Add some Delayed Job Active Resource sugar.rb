@@ -26,16 +26,16 @@
 
 # 2.1 create file app/models/remote_comment.rb
   
-# 2.2 Add the code
+# 2.2 Add the RemoteComment ActiveResource  (NOTE!!!!!! ActiveResource NOT ActiveRecord)
 
 class RemoteComment < ActiveResource::Base
   
-  site "http://localhost:4567"
+  self.site = "http://localhost:4567"
   
 end  
   
 
-# 3 Add the callback when a comment is created
+# 3 Add a callback so that when a comment is created it creates an ActiveResource object that will send JSON to our Sintra Server
 
 # 3.1 in app/models/comment.rb
 
@@ -44,10 +44,16 @@ after_create :notify
 private
 
 def notify
-  RemoteComment.new(:text => self.text).save
+  rc = RemoteComment.new(:text => self.text)
+  rc.save
 end
 
-handle_asynchronously :notify
+handle_asynchronously :notify  
+#meta programming uses alias_method to create a copy of notify called 'notify_with_delay'. It then overrides 'notify'
+#so that notify serializes this instance of comment and saves it into a DelayedJob object. 
+# When we run bundle exec rake jobs:work this job will be deserialzed and the notify_with_delay method called.   
+
+
 
 
 # 4 Create the Sinatra App

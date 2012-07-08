@@ -12,7 +12,7 @@
 # 2. Add our attributes to the migration created in db/migrate/{timestamp}_create_comments.rb
 
     create_table :comments do |t|
-        t.integer :profile_id
+        t.integer :profile_id #this is the belongs_to association key
         t.string :text
         t.timestamps
     end 
@@ -25,11 +25,11 @@
 
 # 3.1 Set up the profile <> comments has_many association
 
-# in app/models/profiles.rb
+# add the association to app/models/profiles.rb
 
   has_many :comments
   
-# in app/models/comments.rb
+# and also to app/models/comments.rb
 
   belongs_to :profile
   

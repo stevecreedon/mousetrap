@@ -14,7 +14,7 @@
 # 2.1 in config/routes.rb
 
     resources :users, :only => [:index] do
-      resource :profile do, :except => [:destroy]
+      resource :profile, :except => [:destroy] do
         resources :comments, :only => [:create]
       end
     end
@@ -23,13 +23,7 @@
 
     bundle exec rake routes
     
-# 2.3 TRY THIS AS AN FYI
-# we only need a create for this app but comment out the , :only => [:create] 
-# and run rake routes again to see all these nested routes.
-# Note that :show & :update only need a user_id and id (id being comment id).
-# No profile id is required because it's a has_one relationship between user and profile.
-
-# 3. Add the create action to tyhe comments controller
+# 3. Add the create action to the comments controller
 
 # in app/controllers/comments_controller.rb
 
@@ -41,9 +35,11 @@ end
 
 # 4. Create the comments views
 
+# We're going to embed comments in the profile's show.html.erb so we only need partials _new and _show
+
 # 4.1 Create the new comment partial
 
-# create the file app/views/_new.html.erb (note the underscore) 
+# create the file app/views/comments/_new.html.erb (note the underscore) 
 
 # add this code
 
@@ -59,7 +55,7 @@ end
 
 # 4.2 Create the show comment partial
 
-# create the file app/views/_show.html.erb (note the underscore) 
+# create the file app/views/comments/_show.html.erb (note the underscore) 
 
 # add this code
 
@@ -68,7 +64,7 @@ end
 	<%= comment.text %>
 </div>
 
-                                                                        >(ignore this line)
+                                                                        
                                                                         
 # 5. Update our profiles show  view to display and add comments:
 
@@ -82,7 +78,7 @@ end
 
 <%= render :partial => "comments/new", :locals => {:comment => Comment.new } %>
 
-                                                                        >(ignore this line)
+                                                                        
                                                                         
 
 # 5.2 Let's test the app
